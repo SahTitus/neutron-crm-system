@@ -1,0 +1,81 @@
+@keyframes spin {
+    0% {
+      opacity: 1;
+    }
+  
+    100% {
+      opacity: 0;
+    }
+  }
+  
+  .spin {
+    width: 100px;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    margin-top: -5px;
+    z-index:100000;
+  }
+  
+  .spin div {
+    left: 48px;
+    top: 34.5px;
+    position: absolute;
+    animation: spin linear 1s infinite;
+    background: #fff;
+    width: 4px;
+    height: 11px;
+    border-radius: 2px / 3.74px;
+    transform-origin: 2px 15.5px;
+    z-index:100000;
+  }
+  
+  .spin div:nth-child(1) {
+    transform: rotate(0deg);
+    animation-delay: -0.9s;
+  }
+  
+  .spin div:nth-child(2) {
+    transform: rotate(36deg);
+    animation-delay: -0.8s;
+  }
+  
+  .spin div:nth-child(3) {
+    transform: rotate(72deg);
+    animation-delay: -0.7s;
+  }
+  
+  .spin div:nth-child(4) {
+    transform: rotate(108deg);
+    animation-delay: -0.6s;
+  }
+  
+  .spin div:nth-child(5) {
+    transform: rotate(144deg);
+    animation-delay: -0.5s;
+  }
+  
+  .spin div:nth-child(6) {
+    transform: rotate(180deg);
+    animation-delay: -0.4s;
+  }
+  
+  .spin div:nth-child(7) {
+    transform: rotate(216deg);
+    animation-delay: -0.3s;
+  }
+  
+  .spin div:nth-child(8) {
+    transform: rotate(252deg);
+    animation-delay: -0.2s;
+  }
+  
+  .spin div:nth-child(9) {
+    transform: rotate(288deg);
+    animation-delay: -0.1s;
+  }
+  
+  .spin div:nth-child(10) {
+    transform: rotate(324deg);
+    animation-delay: 0s;
+  }

@@ -1,5 +1,12 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/features/ThemeProvider";
+import { Sidebar } from "@components/shared/Sidebar";
+import AuthProviders from "@components/features/Provider";
+import { StateProvider } from "@redux/StateProvider";
+import { UserSession } from "@components/features/UserSession";
+import { Navbar } from "@components/shared/Navbar";
+import { OfflineIndicator } from "@components/features/OfflineIndicator";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,7 +18,32 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <AuthProviders>
+          <StateProvider>
+            <ThemeProvider>
+              <div className="flex h-screen overflow-hidden ">
+                {/* Sidebar Container */}
+                <div className="h-full">
+                  <Sidebar />
+                </div>
+
+                {/* Main Content Container */}
+                <div className="flex flex-col flex-1 px-[1%] bg-slate-200 dark:bg-[#151a2d] overflow-hidden">
+                  <div className="sticky top-0 z-10 ">
+                    <Navbar />
+                  </div>
+                  <div id="main-container" className="flex-1 main-container overflow-auto custom-scrollbar">
+                    {children}
+                  </div>
+                </div>
+              </div>
+              <OfflineIndicator />
+              <UserSession />
+            </ThemeProvider>
+          </StateProvider>
+        </AuthProviders>
+      </body>
     </html>
   );
 }

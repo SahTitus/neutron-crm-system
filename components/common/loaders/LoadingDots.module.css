@@ -1,0 +1,49 @@
+.loading {
+  display: inline-flex;
+  align-items: center;
+  z-index: 1000;
+  height: 80px;
+}
+
+.loading span {
+  animation-name: blink;
+  animation-duration: 1.4s;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--accents-6);
+  display: inline-block;
+  margin: 0 1px;
+  z-index: 1000;
+}
+
+.loading span:nth-of-type(2) {
+  animation-delay: 0.2s;
+  z-index: 1000;
+}
+
+.loading span:nth-of-type(3) {
+  animation-delay: 0.4s;
+  z-index: 1000;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0.2;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
+
+.child {
+  margin-right: 12px;
+  color: var(--secondary);
+  font-size: 0.9rem;
+  z-index: 1000;
+};
