@@ -14,10 +14,7 @@ export const POST = async (request) => {
     const NODEMAILER_PASSWORD = process.env.NODEMAILER_PASSWORD;
 
     const credentials = {
-        client_id: process.env.GOOGLE_CLIENT_ID,
-        client_secret: process.env.GOOGLE_CLIENT_SECRET,
-        pass: NODEMAILER_PASSWORD,
-        appEmail: process.env.APP_EMAIL
+       
     };
 
     try {
