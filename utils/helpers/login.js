@@ -1,18 +1,22 @@
 import { signIn } from "next-auth/react";
+import { logger } from "./log";
 
-export const login = async (email, password, loginFailure, dispatch) => {
 
-    await signIn("credentials", {
+export const login = async (email, password, loginFailure, dispatch, router) => {
+    const res = await signIn("credentials", {
         redirect: false,
-        email: email,
-        password: password,
-    }).then((res) => {
-        if (!res.ok) {
-            dispatch(loginFailure(res?.error))
-            return;
-        }
+        email,
+        password,
     });
-}
+
+    if (!res.ok) {
+        dispatch(loginFailure(res?.error));
+        logger(res?.error);
+    } else {
+        return router.push('/')
+    }
+};
+
 
 export const sessionHasExpiry = (expires) => {
     if (expires) {
@@ -21,7 +25,7 @@ export const sessionHasExpiry = (expires) => {
 
         if (currentTime >= sessionExpiryTime) {
             signOut();
-            router.push(routes.auth)
+            // router.push(routes.auth)
         }
     }
 };

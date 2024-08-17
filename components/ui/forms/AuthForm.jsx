@@ -67,13 +67,13 @@ export const AuthForm = ({ userId }) => {
 
                 if (result?.status === 200) {
                     // log user in
-                    login(email, password, loginFailure, dispatch, setToastMsg)
+                    await login(email, password, loginFailure, dispatch, setToastMsg, router)
                 }
 
                 setBase64String('')
             } else {
                 // log user in
-                login(email, password, loginFailure, dispatch)
+                await login(email, password, loginFailure, dispatch, router);
             };
 
         } catch (error) {
@@ -96,7 +96,7 @@ export const AuthForm = ({ userId }) => {
     useEffect(() => {
         const { status, data } = session;
 
-        if (status === "authenticated" && data?.user?.email && !isEditProfile) {
+        if (status === "authenticated" && !!data?.user?.email && !isEditProfile) {
             dispatch(loginSuccess(data?.user));
             router.push(routes.home);
         }
