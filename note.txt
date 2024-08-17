@@ -1,4 +1,0 @@
-if time permits send emails to users they create accounts 
-
-general name that encompasses customers, leads, and opportunities is "Contacts", while considering that companies
- are referred to as users in our system, Neutron.
