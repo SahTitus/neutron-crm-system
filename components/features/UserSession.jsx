@@ -15,7 +15,7 @@ export const UserSession = () => {
   sessionHasExpiry(session?.expires)
 
   useEffect(() => {
-    if (status === "authenticated" && session?.user?.email) {
+    if (status === "authenticated" && !!session?.user?.email) {
       dispatch(userData(session.user));
 
     } else {

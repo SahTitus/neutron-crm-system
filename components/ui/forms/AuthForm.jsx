@@ -61,7 +61,7 @@ export const AuthForm = ({ userId }) => {
                 dispatch(updateProfile(updatedData));
                 setToastMsg(prevState => ({ ...prevState, message: `Profile updated successfully` }));
                 router.push(routes.settings);
-            } else if (isSignUp) {
+            } else if (isSignUp && !isEditProfile) {
                 //if its sign up create a new user in db if successful login user
                 const result = await registerUser(sanitizedFormData);
 
