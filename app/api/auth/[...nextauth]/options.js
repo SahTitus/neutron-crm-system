@@ -42,8 +42,14 @@ export const OPTIONS = {
     })
   ],
   session: {
+    strategy: "jwt",
     maxAge: 5 * 60 * 60, // 5 hour in seconds
+    updateAge: 24 * 60 * 60,
+    cookie: {
+      secure: process.env.NODE_ENV === "production",
+    },
   },
+  
   callbacks: {
     // Callback to handle session creation
     async session({ session, token }) {
