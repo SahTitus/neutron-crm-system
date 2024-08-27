@@ -35,3 +35,9 @@ export const convertImageToBase64 = (file) =>
         reader.onload = () => resolve(reader.result);
         reader.onerror = (error) => reject(error);
     });
+
+
+    export const handleOpenCampaignModal = (setFormType, toggleSideModal) => {
+        setFormType('campaign');
+        toggleSideModal('dynamicForm')
+    }

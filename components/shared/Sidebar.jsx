@@ -62,7 +62,7 @@ export const Sidebar = () => {
     }, [pathname])
 
     return (
-        <div className={`sticky top-0 ${hideSide ? 'hidden' : 'flex'} flex-col bg-slate-100 dark:bg-[#192037] gap-5 ${isCollapsed ? 'w-[130px]' : 'sm:w-[200px] md:w-[250px]'} h-screen py-4 px-4 transition-all duration-300`}>
+        <div className={`sticky top-0 ${hideSide ? 'hidden' : 'flex'} flex-col bg-white dark:bg-[#192037] gap-5 ${isCollapsed ? 'w-[130px]' : 'sm:w-[200px] md:w-[250px]'} h-screen py-4 px-4 transition-all duration-300`}>
             <div className={`flex justify-between items-center w-full ${isCollapsed ? 'justify-center' : ''}`}>
                 <Link href='/'>
                     <p className={` flex text-center  text-[#0DD983] custom-3d ${isCollapsed ? 'text-2xl -ml-[2px]' : 'text-3xl '} font-extrabold tracking-wide select-none`}>Neutron</p>
@@ -71,7 +71,7 @@ export const Sidebar = () => {
             </div>
             <div className="flex flex-col flex-1 items-start w-full overflow-y-auto custom-scrollbar pr-1">
                 {sidebarTopItems.map((item, index) => (
-                    <Link href={item.path} onClick={() => handleSelectNavItem(item)} className={`flex items-center gap-6 text-sm ${isActive === item.path ? 'bg-green-500 text-white' : ' dark:hover:bg-white text-[#8F8F8F] dark:text-[#8F8F8F]'} ${isCollapsed ? 'justify-center w-3/4 mx-auto  ' : 'justify-start px-4'} h-8 my-1 rounded-md w-full transition-all duration-300`} key={index}>
+                    <Link href={item.path} onClick={() => handleSelectNavItem(item)} className={`flex items-center gap-6 text-sm ${isActive === item.path ? 'bg-green-500 text-white' : 'text-gray-700 dark:hover:bg-white text-[#8F8F8F] dark:text-[#8F8F8F]'} ${isCollapsed ? 'justify-center w-3/4 mx-auto' : 'justify-start px-4'} h-8 my-1 rounded-md w-full transition-all duration-300`} key={index}>
                         {item.icon}
                         {!isCollapsed && <p>{item.label}</p>}
                     </Link>
@@ -81,15 +81,15 @@ export const Sidebar = () => {
             <hr className='h-[1px] w-full my-4 mx-auto  border-none bg-gray-400 dark:bg-gray-600' />
             <div className="flex flex-col items-start w-full ">
                 {/* log out */}
-                <div onClick={handleLogout} className={`flex items-center gap-6 text-sm text-white' hover:bg-slate-200  dark:hover:bg-white text-[#8F8F8F] dark:text-[#8F8F8F] ${isCollapsed ? 'justify-center w-3/4 mx-auto  ' : 'justify-start px-4'} h-8 my-1 rounded-md w-full cursor-pointer transition-all duration-300`} >
-                    <RiLogoutCircleRLine className='text-2xl text-red-400' />
+                <div onClick={handleLogout} className={`flex items-center gap-6 text-sm text-white' hover:bg-slate-200  dark:hover:bg-white text-gray-800 dark:text-[#8F8F8F] ${isCollapsed ? 'justify-center w-3/4 mx-auto  ' : 'justify-start px-4'} h-8 my-1 rounded-md w-full cursor-pointer transition-all duration-300`} >
+                    <RiLogoutCircleRLine className='text-2xl text-red-500 dark:text-red-400' />
                     {!isCollapsed && <p>Log out</p>}
                 </div>
             </div>
             <Tooltip title={`${isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'} `} arrow>
                 <div
                     onClick={toggleSidebar}
-                    className={`absolute bottom-8 -right-5 flex items-center justify-center text-gray-700 bg-gray-800 shadow-inner h-11 w-11 shadow-slate-500 rounded-full text-3xl  dark:text-white hover:bg-gray-700 transition-all duration-300 cursor-pointer`}
+                    className={`absolute bottom-8 -right-5 flex items-center justify-center text-gray-700 bg-gray-300 shadow-md shadow-slate-500 dark:bg-gray-800 dark:shadow-inner h-11 w-11 dark:shadow-slate-500 rounded-full text-3xl  dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 cursor-pointer`}
                 >
                     {isCollapsed ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
                 </div>

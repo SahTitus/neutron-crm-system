@@ -192,7 +192,7 @@ const Chart = ({ dataSets, labels, excludedKey }) => {
   }, [theme]);
 
   return (
-    <div className={`shadow-2xl shadow-slate-800 bg-gray-900 w-full p-2 ${theme === 'light' ? 'bg-white' : 'bg-gray-900'} rounded-lg shadow-lg h-full`}>
+    <div className={`bg-slate-100 shadow-sm shadow-slate-400 dark:shadow-2xl dark:shadow-slate-800 dark:bg-gray-900 w-full p-2 ${theme === 'light' ? 'bg-white' : 'bg-gray-900'} rounded-lg shadow-lg h-full`}>
       {/* <div className="flex justify-between mb-4 w-full h-full"> */}
       {/* <label className="flex items-center">
           <input

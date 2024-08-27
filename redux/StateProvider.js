@@ -7,12 +7,14 @@ const StateContext = createContext();
 //wrap our app and provide the Data layer
 export const StateProvider = ({ children }) => {
   const pathname = usePathname();
-  const [profileData, setProfileData] = useState({});
+
   const [showToast, setShowToast] = useState(false);
+  const [profileData, setProfileData] = useState({});
   const [formType, setFormType] = useState('customer');
   const [base64String, setBase64String] = useState('');
   const [isEditProfile, setEditProfile] = useState(false)
   const [showAuthForm, setShowAuthForm] = useState(false);
+  const [recepientEmail, setRecepientEmail] = useState('');
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formItemToEdit, setFormItemToEdit] = useState(null);
   const [modalContentType, setModalContentType] = useState('');
@@ -39,7 +41,7 @@ export const StateProvider = ({ children }) => {
 
   const toggleShowAuthForm = () => { setShowAuthForm((prev) => !prev) };
 
-  const toggleSideModal = (type, product) => {
+  const toggleSideModal = (type) => {
 
     setModalContentType(type)
     setIsSideModalOpen(prevState => !prevState)
@@ -61,7 +63,7 @@ export const StateProvider = ({ children }) => {
         clearTimeout(timer);
       };
     }
-  }, [showToast]); // Run this effect only once on component mount
+  }, [showToast]); // Run once on component mount
 
   return (
     <StateContext.Provider
@@ -78,6 +80,7 @@ export const StateProvider = ({ children }) => {
         currentRoute,
         isEditProfile,
         formSubmitted,
+        recepientEmail,
         formItemToEdit,
         isSideModalOpen,
         showAddToCartBtn,
@@ -96,6 +99,7 @@ export const StateProvider = ({ children }) => {
         setCurrentRoute,
         setBase64String,
         setFormSubmitted,
+        setRecepientEmail,
         setFormItemToEdit,
         toggleShowAuthForm,
         setShowLoaderOverlay,

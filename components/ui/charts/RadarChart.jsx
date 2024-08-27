@@ -86,8 +86,8 @@ const RadarChart = ({campaignStats}) => {
     },
   };
   return (
-    <div className="flex flex-col items-center justify-center bg-gray-900 rounded-lg shadow-lg px-6 py-8 h-[460px]">
-      <h2 className="text-xl font-semibold mb-4 text-center">Compaigns Performance</h2>
+    <div className="flex flex-col items-center justify-center bg-white dark:bg-gray-900 rounded-lg shadow-sm shadow-slate-400 dark:shadow-lg px-6 py-8 h-[460px]">
+      <h2 className="text-xl font-semibold mb-4 text-center text-gray-800 dark:text-slate-200">Compaigns Performance</h2>
       <div className="flex justify-center relative w-full h-full">
         <Radar data={data} options={options} />
       </div>

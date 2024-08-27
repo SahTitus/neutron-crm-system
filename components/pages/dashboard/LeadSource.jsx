@@ -40,10 +40,10 @@ export const LeadSources = ({ metrics, topN = 4 }) => {
   }, []);
 
   return (
-    <div className="w-full mx-auto p-4 h-full bg-gray-900 text-white rounded-lg shadow-lg">
+    <div className="w-full mx-auto p-4 h-full bg-white shadow-sm shadow-slate-400  text-gray-800 dark:bg-gray-900 dark:text-white rounded-lg dark:shadow-lg">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-semibold">Top {topN} Lead Sources</h2>
-        <div className="bg-gray-700 p-2 rounded-md">This Week</div>
+        <div className="bg-slate-300 dark:bg-gray-700 p-2 rounded-md">This Week</div>
       </div>
       <div className="space-y-4">
         {updatedLeadSources.map((source, index) => (

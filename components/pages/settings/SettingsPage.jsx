@@ -54,7 +54,7 @@ const SettingsPage = ({ user }) => {
 	};
 
 	return (
-		<div className="p-6 bg-gray-100 dark:bg-gray-900 min-h-screen flex justify-center items-center">
+		<div className="p-6 bg-slate-100 dark:bg-gray-900 min-h-screen flex justify-center items-center">
 			<div className="w-full min-w-[500px] max-w-4xl bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden">
 				{/* Profile Section */}
 				<div className="flex flex-col items-center p-6 bg-gray-200 dark:bg-gray-700">

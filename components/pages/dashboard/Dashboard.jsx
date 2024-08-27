@@ -67,38 +67,38 @@ export const Dashboard = ({ metrics, data }) => {
                 />
             </div>
             <div className="flex justify-between w-full gap-4 mt-6 h-80">
-                <div className="w-3/5 h-full bg-gray-800 rounded-lg p-2">
+                <div className="w-3/5 h-full bg-slate-100 dark:bg-gray-800 rounded-lg p-2">
                     <Chart
                         dataSets={metrics.monthlyDataset.dataSets}
                         labels={metrics.monthlyDataset.labels}
                         excludedKey={"Opportunities"}
                     />
                 </div>
-                <div className="w-2/5 h-full bg-gray-800 rounded-lg p-2">
+                <div className="w-2/5 h-full bg-slate-100 dark:bg-gray-800 rounded-lg p-2">
                     <LeadSources metrics={metrics.leads} />
                 </div>
             </div>
 
-            <div className="flex  w-full gap-4 mt-6 h-[480px]">
-                <div className="w-3/5 h-full bg-gray-800 rounded-lg p-2 ">
+            <div className="flex w-full gap-4 mt-6 h-[480px]">
+                <div className="w-3/5 h-full bg-slate-100 dark:bg-gray-800 rounded-lg p-2 ">
                     <RadarChart campaignStats={metrics?.campaignPerformance} />
                 </div>
-                <div className="w-2/5 h-full bg-gray-800 rounded-lg p-2">
+                <div className="w-2/5 h-full bg-slate-100 dark:bg-gray-800 rounded-lg p-2">
                     <UpcomingTasks tasks={data.upcomingTasks} />
                 </div>
             </div>
 
             <div className="flex  w-full gap-4 mt-6 h-[400px]">
-                <div className="w-3/5 h-full bg-gray-800 rounded-lg p-2 ">
+                <div className="w-3/5 h-full bg-slate-100 dark:bg-gray-800 rounded-lg p-2 ">
                     <RecentLeads leads={data?.leads} />
                 </div>
-                <div className="w-2/5 h-full bg-gray-800 rounded-lg p-2">
+                <div className="w-2/5 h-full bg-slate-100 dark:bg-gray-800 rounded-lg p-2">
                     <RecentActivities activities={data.recentActivities} />
                 </div>
             </div>
 
             <div id="customers" className="relative flex gap-4 mt-6">
-                <div className="w-full h-full bg-gray-800 rounded-lg p-2 ">
+                <div className="w-full h-full bg-slate-100 dark:bg-gray-800 rounded-lg p-2 ">
                     <CustomersList
                         currentPage={customerData?.currentPage}
                         customers={customerData?.customers}
@@ -110,7 +110,7 @@ export const Dashboard = ({ metrics, data }) => {
                 </div>
             </div>
             <div id='opportunities' className="relative flex gap-4 mt-6">
-                <div className="w-full h-full bg-gray-800 rounded-lg p-2 ">
+                <div className="w-full h-full bg-slate-100 dark:bg-gray-800 rounded-lg p-2 ">
                     <OpportunitiesList
                         currentPage={opportunitiesData?.currentPage}
                         opportunities={opportunitiesData?.opportunities}

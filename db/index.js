@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 // Load environment variables
-const env = process.env.NODE_ENV;
+const env = process.env.NODE_ENV || "development";
 const dbName = process.env.MONGODB_DB;
 
 // Use different URIs based on the environment

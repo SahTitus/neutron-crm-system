@@ -20,8 +20,8 @@ export const useConfirmationModal = () => {
         if (!isModalOpen) return null;
 
         return (
-            <div className={`fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 transition-opacity duration-300 ${isModalOpen ? 'opacity-100' : 'opacity-0'}`}>
-                <div className={`bg-white rounded-lg shadow-lg p-6 max-w-sm w-full transform transition-all duration-300 ${isModalOpen ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+            <div className="bg-white rounded-lg shadow-lg p-6 max-w-sm w-full">
                     <p className="text-gray-800 text-lg">{modalConfig.message}</p>
                     <div className="flex justify-end mt-6">
                         <button

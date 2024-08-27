@@ -34,7 +34,7 @@ export const CustomerPage = ({ data }) => {
 				/>
 			</div>
 			<div className="relative flex gap-4 mt-6">
-				<div className="w-full h-full bg-gray-800 rounded-lg p-2 ">
+				<div className="w-full h-full bg-slate-100 dark:bg-gray-800 rounded-lg p-2 ">
 					<CustomersList
 						showPagination={true}
 						currentPage={currentPage}

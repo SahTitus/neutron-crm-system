@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import { CampaignCard } from "../cards/CampaignCard";
 import { Pagination } from "@components/common/Pagination";
-import { ConfirmationModal } from "../modals/ConfirmationModal";
 import { useSelector } from "react-redux";
 import { addMoreCampaigns, deleteCampaign, fetchCampaignsFailure, fetchCampaignsStart, onPageChange } from "@redux/features/campaignSlice";
 import { useConfirmationModal } from "@hooks/useConfirmationModal";
@@ -82,12 +81,13 @@ export const CampaignList = ({ campaigns, showPagination, currentPage, totalPage
 	return (
 		<section className="p-6 space-y-6 w-full rounded-2xl bg-gray-50 dark:bg-[#121826] transition-colors duration-500">
 			<Toast styles='fixed top-10 left-1/2' />
-			
+
 			{campaigns.map((campaign) => (
 				<CampaignCard
 					key={campaign._id}
 					campaign={campaign}
 					anchorEl={anchorEl}
+					isSearch={false}
 					handleDelete={handleDelete}
 					handleMenuOpen={handleMenuOpen}
 					handleMenuClose={handleMenuClose}

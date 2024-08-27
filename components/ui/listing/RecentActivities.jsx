@@ -28,19 +28,19 @@ export const RecentActivities = ({ activities }) => {
   });
 
   return (
-    <div className=" px-3 py-4 bg-gray-900 rounded-lg shadow text-gray-400 text-sm w-full h-full overflow-hidden">
-      <h2 className="text-lg font-semibold mb-4">Recent Activities</h2>
+    <div className=" px-3 py-4 bg-white dark:bg-gray-900 rounded-lg shadow-sm dark:shadow text-gray-400 text-sm w-full h-full overflow-hidden">
+      <h2 className="text-gray-800 dark:text-white text-lg font-semibold mb-4">Recent Activities</h2>
       <ul className='relative overflow-y-auto px-2 custom-scrollbar h-full pb-8'>
         {updatedActivities?.map(activity => (
-          <li key={activity?._id} className="flex items-center p-2 mb-2 bg-gray-800 rounded-lg shadow">
+          <li key={activity?._id} className="flex items-center p-2 mb-2 bg-white dark:bg-gray-800 rounded-lg shadow">
             <span className="text-2xl mr-4">{activity?.icon}</span>
             <div className='flex flex-col w-full gap-1'>
-              <p className="text-gray-200 line-clamp-2">{activity?.purpose}</p>
+              <p className="text-gray-800 dark:text-gray-200 line-clamp-2">{activity?.purpose}</p>
               <div className="flex justify-between text-gray-400 text-xs w-full">
-                <p className='flex items-center text-teal-400'>{activity?.performedBy?.userName} <LuDot className='text-blue-500' />
-                  <span className='text-teal-500j'>{activity?.type}</span>
+                <p className='flex items-center text-pink-500 dark:text-teal-400'>{activity?.performedBy?.userName} <LuDot className='text-blue-500' />
+                  <span className=' text-pink-500 dark:text-teal-400'>{activity?.type}</span>
                 </p>
-                <p className="text-gray-500 text-xs">{formatDistanceToNow(new Date(activity?.createdAt))} ago</p>
+                <p className="text-gray-600 dark:text-gray-400 text-xs">{formatDistanceToNow(new Date(activity?.createdAt))} ago</p>
               </div>
             </div>
           </li>

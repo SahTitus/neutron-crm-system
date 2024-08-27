@@ -29,14 +29,14 @@ export const SalesContent = ({ metrics, leadsData, opportunitiesData }) => {
 	return (
 		<section className="h-full p-4 flex flex-col  w-full rounded-2xl bg-[#f7f7f7] dark:bg-[#192037] transition-colors duration-500 ">
 			<div className="flex justify-between w-full gap-4 h-80">
-				<div className="w-3/5 h-full bg-gray-800 rounded-lg p-2">
+				<div className="w-3/5 h-full bg-slate-100 dark:bg-gray-800 rounded-lg p-2">
 					<Chart
 						dataSets={metrics.monthlyDataset.dataSets}
 						labels={metrics.monthlyDataset.labels}
 						excludedKey={"Campaigns"}
 					/>
 				</div>
-				<div className="w-2/5 h-full bg-gray-800 rounded-lg p-2">
+				<div className="w-2/5 h-full bg-slate-100 dark:bg-gray-800">
 					<LeadSources metrics={metrics.leads} />
 				</div>
 			</div>
@@ -64,7 +64,7 @@ export const SalesContent = ({ metrics, leadsData, opportunitiesData }) => {
 			</div>
 
 			<div className="relative flex flex-col gap-10 mt-6">
-				<div id='opportunities' className="w-full h-full bg-gray-800 rounded-lg p-2 ">
+				<div id='opportunities' className="w-full h-full bg-slate-100 dark:bg-gray-800 ">
 					<OpportunitiesList
 						currentPage={currentPage}
 						opportunities={opportunities}
@@ -74,7 +74,7 @@ export const SalesContent = ({ metrics, leadsData, opportunitiesData }) => {
 						error={error}
 					/>
 				</div>
-				<div id='leads' className="w-full h-full bg-gray-800 rounded-lg p-2 ">
+				<div id='leads' className="w-full h-full bg-slate-100 dark:bg-gray-800 ">
 					<LeadsList
 						currentPage={leads?.currentPage}
 						leads={leads?.leads}

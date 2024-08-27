@@ -76,7 +76,6 @@ export const ielice = createSlice({
     },
     saveOpportunityUpdate: (state, action) => {
       const updatedOpportunity = action.payload;
-      consolelog(action.payload, 'yh saving payload')
       state.opportunities = state.opportunities.map((opportunity) =>
         opportunity._id === updatedOpportunity._id ? updatedOpportunity : opportunity
       );

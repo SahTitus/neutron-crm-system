@@ -75,7 +75,7 @@ const CampaignPieChart = ({ totalSent = 0, totalOpened = 0, totalClicked = 0, to
 	};
 
 	return (
-		<div className="sticky top-0 flex justify-center items-center h-full min-h-[370px] max-h-[400px] w-full px-2 bg-slate-100 dark:bg-[#121826] transition-all duration-300">
+		<div className="sticky top-0 flex justify-center items-center h-full min-h-[370px] max-h-[400px] w-full px-2 bg-white dark:bg-[#121826] transition-all duration-300 rounded-lg ">
 			<Chart
 				options={chartData.options}
 				series={chartData.series}

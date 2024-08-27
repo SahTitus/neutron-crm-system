@@ -15,6 +15,7 @@ import { useStateContext } from '@redux/StateProvider';
 import { useSelector } from 'react-redux';
 import { fetchFilters } from '@lib/constants/filters';
 import { ExportFileButton } from '@components/features/ExportFileButton';
+import { handleOpenCampaignModal } from '@utils/helpers';
 
 
 export const CustomersList = ({ showPagination, customers, currentPage, totalPages, dispatch }) => {
@@ -24,7 +25,7 @@ export const CustomersList = ({ showPagination, customers, currentPage, totalPag
 
     const { toggleConfirmationModal, ConfirmationModal } = useConfirmationModal();
 
-    const { setShowToast, setToastMsg, toggleSideModal, setFormType, setFormItemToEdit } = useStateContext();
+    const { setRecepientEmail, setShowToast, setToastMsg, toggleSideModal, setFormType, setFormItemToEdit } = useStateContext();
 
     const handleMenuOpen = (event, id) => {
         setAnchorEl(event.currentTarget);
@@ -106,11 +107,11 @@ export const CustomersList = ({ showPagination, customers, currentPage, totalPag
     };
 
     return (
-        <div className="flex flex-col p-4 bg-gray-900 rounded-lg shadow text-gray-400">
+        <div className="flex flex-col p-4  bg-white dark:bg-gray-900 rounded-lg shadow text-gray-800 dark:text-gray-400">
             <Toast styles='fixed top-10 left-1/2' />
 
             <div className="flex items-center justify-between">
-                <h2 className="text-lg font-semibold text-slate-200">New Customers</h2>
+                <h2 className="text-lg font-semibold text-gray-800 dark:text-slate-200">New Customers</h2>
                 {showPagination ? (
                     <ExportFileButton
                         data={updatedCustomers}
@@ -127,48 +128,51 @@ export const CustomersList = ({ showPagination, customers, currentPage, totalPag
                 <table className="w-full bg-gray-900 table-fixed">
                     <thead>
                         <tr>
-                            <th className="w-20 text-left bg-gray-800 px-4 py-2">Image</th>
-                            <th className="w-52 text-left bg-gray-800 px-4 py-2">Name</th>
-                            <th className="w-72 text-left bg-gray-800 px-4 py-2">Email</th>
-                            <th className="w-24 text-left bg-gray-800 px-4 py-2">Gender</th>
-                            <th className="w-24 text-left bg-gray-800 px-4 py-2">Status</th>
-                            <th className="w-40 text-left bg-gray-800 px-4 py-2">Phone</th>
-                            <th className="w-40 text-left bg-gray-800 px-4 py-2">Country</th>
-                            <th className="w-36 text-left bg-gray-800 px-4 py-2">Contact</th>
-                            <th className="w-40 text-left bg-gray-800 px-4 py-2">Source</th>
-                            <th className="w-20 text-left bg-gray-800 px-4 py-2">Action</th>
+                            <th className="w-20 text-left bg-white dark:bg-gray-800 px-4 py-2">Image</th>
+                            <th className="w-52 text-left bg-white dark:bg-gray-800 px-4 py-2">Name</th>
+                            <th className="w-72 text-left bg-white dark:bg-gray-800 px-4 py-2">Email</th>
+                            <th className="w-24 text-left bg-white dark:bg-gray-800 px-4 py-2">Gender</th>
+                            <th className="w-24 text-left bg-white dark:bg-gray-800 px-4 py-2">Status</th>
+                            <th className="w-40 text-left bg-white dark:bg-gray-800 px-4 py-2">Phone</th>
+                            <th className="w-40 text-left bg-white dark:bg-gray-800 px-4 py-2">Country</th>
+                            <th className="w-36 text-left bg-white dark:bg-gray-800 px-4 py-2">Contact</th>
+                            <th className="w-40 text-left bg-white dark:bg-gray-800 px-4 py-2">Source</th>
+                            <th className="w-20 text-left bg-white dark:bg-gray-800 px-4 py-2">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {updatedCustomers?.map((customer) => (
                             <tr key={customer._id}>
-                                <td className="px-4 py-2 border-gray-700 border-b">
+                                <td className="px-4 py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-b">
                                     <Image src={customer.image} alt="avatar" width={40} height={40} className="rounded-full w-10 h-10" />
                                 </td>
-                                <td className="px-4 py-2 border-gray-700 border-b">{`${customer.firstName} ${customer.lastName}`}</td>
-                                <td className="px-4 py-2 border-gray-700 border-b">{customer.email}</td>
-                                <td className="px-4 py-2 border-gray-700 border-b">{customer.gender}</td>
-                                <td className=" py-2 border-gray-700 border-b">
+                                <td className="px-4 py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-b">{`${customer.firstName} ${customer.lastName}`}</td>
+                                <td className="px-4 py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-b">{customer.email}</td>
+                                <td className="px-4 py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-b">{customer.gender}</td>
+                                <td className=" py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-b">
                                     <span className={`flex justify-center px-4 py-1 rounded text-xs font-semibold ${customer.status === 'Active' ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800'}`}>
                                         {customer.status}
                                     </span>
                                 </td>
-                                <td className="px-4 py-2 border-gray-700 border-b">
+                                <td className="px-4 py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-b">
                                     {customer.phoneNumber}
                                 </td>
-                                <td className="px-4 py-2 border-gray-700 border-b">{customer.country}</td>
-                                <td className="px-4 py-2 border-gray-700 border-b">
+                                <td className="px-4 py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-b">{customer.country}</td>
+                                <td className="px-4 py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-b">
                                     <a aria-label="Telephone" href={`tel:${customer.phoneNumber}`} className="text-gray-200">
                                         <Call className="cursor-pointer" />
                                     </a>
-                                    <Email className="cursor-pointer mx-4" />
+                                    <Email
+                                        onClick={() => handleOpenCampaignModal(setFormType, toggleSideModal, setRecepientEmail(customer?.email))}
+                                        className="cursor-pointer mx-4"
+                                    />
                                 </td>
-                                <td className={`px-4 py-2 border-gray-700 border-b`}>
+                                <td className={`px-4 py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-b`}>
                                     <span className={`${customer?.sourceColor} flex justify-center text-xs font-semibold w-full text-center py-[5px] rounded`}>
                                         {customer.source}
                                     </span>
                                 </td>
-                                <td className="px-4 py-2 border-gray-700 border-b relative">
+                                <td className="px-4 py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-b relative">
                                     <MoreVert className="cursor-pointer" onClick={(event) => handleMenuOpen(event, customer._id)} />
                                     <Menu
                                         anchorEl={anchorEl}

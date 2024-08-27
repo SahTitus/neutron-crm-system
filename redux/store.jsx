@@ -8,12 +8,14 @@ import opportunitySlice from "./features/opportunitySlice";
 import campaignSlice from "./features/campaignSlice";
 import employeeSlice from "./features/employeeSlice";
 import recentActivitySlice from "./features/recentActivitySlice";
+import querySlice from "./features/querySlice";
 
 export const store = configureStore({
   reducer: {
     auth: authSlice,
     lead: leadSlice,
     task: taskSlice,
+    query: querySlice,
     campaign: campaignSlice,
     employee: employeeSlice,
     customer: customerSlice,

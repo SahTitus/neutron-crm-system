@@ -15,6 +15,7 @@ import { useStateContext } from '@redux/StateProvider';
 import { useSelector } from 'react-redux';
 import { fetchFilters } from '@lib/constants/filters';
 import { ExportFileButton } from '@components/features/ExportFileButton';
+import { handleOpenCampaignModal } from '@utils/helpers';
 
 export const LeadsList = ({ showPagination, leads, currentPage, totalPages, dispatch }) => {
 	const [anchorEl, setAnchorEl] = useState(null);
@@ -22,7 +23,7 @@ export const LeadsList = ({ showPagination, leads, currentPage, totalPages, disp
 	const user = useSelector((state) => state.auth.user);
 
 	const { toggleConfirmationModal, ConfirmationModal } = useConfirmationModal();
-	const { setShowToast, setToastMsg, setFormType, toggleSideModal, setFormItemToEdit } = useStateContext();
+	const { setRecepientEmail, setShowToast, setToastMsg, setFormType, toggleSideModal, setFormItemToEdit } = useStateContext();
 
 	const handleMenuOpen = (event, id) => {
 		setAnchorEl(event.currentTarget);
@@ -105,11 +106,11 @@ export const LeadsList = ({ showPagination, leads, currentPage, totalPages, disp
 	};
 
 	return (
-		<div className="flex flex-col p-4 bg-gray-900 rounded-lg shadow text-gray-400">
+		<div className="flex flex-col p-4 bg-white dark:bg-gray-900 rounded-lg shadow text-gray-800 dark:text-gray-400">
 			<Toast styles='fixed top-10 left-1/2' />
 
 			<div className="flex items-center justify-between">
-				<h2 className="text-lg font-semibold text-slate-200">Leads</h2>
+				<h2 className="text-lg font-semibold text-gray-800 dark:text-slate-200">Leads</h2>
 				{showPagination ? (
 					<ExportFileButton
 						data={updatedLeads}
@@ -126,44 +127,47 @@ export const LeadsList = ({ showPagination, leads, currentPage, totalPages, disp
 				<table className="w-full bg-gray-900 table-fixed">
 					<thead>
 						<tr>
-							<th className="w-20 text-left bg-gray-800 px-4 py-2">Image</th>
-							<th className="w-52 text-left bg-gray-800 px-4 py-2">Name</th>
-							<th className="w-72 text-left bg-gray-800 px-4 py-2">Email</th>
-							<th className="w-32 text-left bg-gray-800 px-4 py-2">Status</th>
-							<th className="w-40 text-left bg-gray-800 px-4 py-2">Phone</th>
-							<th className="w-36 text-left bg-gray-800 px-4 py-2">Contact</th>
-							<th className="w-40 text-left bg-gray-800 px-4 py-2">Source</th>
-							<th className="w-20 text-left bg-gray-800 px-4 py-2">Action</th>
+							<th className="w-20 text-left  bg-white dark:bg-gray-900 px-4 py-2">Image</th>
+							<th className="w-52 text-left  bg-white dark:bg-gray-900 px-4 py-2">Name</th>
+							<th className="w-72 text-left  bg-white dark:bg-gray-900 px-4 py-2">Email</th>
+							<th className="w-32 text-left  bg-white dark:bg-gray-900 px-4 py-2">Status</th>
+							<th className="w-40 text-left  bg-white dark:bg-gray-900 px-4 py-2">Phone</th>
+							<th className="w-36 text-left  bg-white dark:bg-gray-900 px-4 py-2">Contact</th>
+							<th className="w-40 text-left  bg-white dark:bg-gray-900 px-4 py-2">Source</th>
+							<th className="w-20 text-left  bg-white dark:bg-gray-900 px-4 py-2">Action</th>
 						</tr>
 					</thead>
 					<tbody>
 						{updatedLeads?.map((lead) => (
 							<tr key={lead._id}>
-								<td className="px-4 py-2 border-gray-700 border-b">
+								<td className="px-4 py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-gray-700 border-b">
 									<Image src={lead.image} alt="avatar" width={40} height={40} className="rounded-full w-10 h-10" />
 								</td>
-								<td className="px-4 py-2 border-gray-700 border-b">{`${lead.firstName} ${lead.lastName}`}</td>
-								<td className="px-4 py-2 border-gray-700 border-b">{lead.email}</td>
-								<td className=" py-2 border-gray-700 border-b">
-									<span className={`flex justify-center px-4 py-1 rounded text-xs font-semibold ${lead.status === 'Active' ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800'}`}>
+								<td className="px-4 py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-gray-700 border-b">{`${lead.firstName} ${lead.lastName}`}</td>
+								<td className="px-4 py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-gray-700 border-b">{lead.email}</td>
+								<td className=" py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-gray-700 border-b">
+									<span className={`flex justify-center px-4 py-1  rounded text-xs font-semibold ${lead.status === 'Active' ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800'}`}>
 										{lead.status}
 									</span>
 								</td>
-								<td className="px-4 py-2 border-gray-700 border-b">
+								<td className="px-4 py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-gray-700 border-b">
 									{lead.phoneNumber}
 								</td>
-								<td className="px-4 py-2 border-gray-700 border-b">
-									<a aria-label="Telephone" href={`tel:${lead.phoneNumber}`} className="text-gray-200">
+								<td className="px-4 py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-gray-700 border-b">
+									<a aria-label="Telephone" href={`tel:${lead.phoneNumber}`} className="text-gray-600 dark:text-gray-200">
 										<Call className="cursor-pointer" />
 									</a>
-									<Email className="cursor-pointer mx-4" />
+									<Email
+										onClick={() => handleOpenCampaignModal(setFormType, toggleSideModal, setRecepientEmail(lead?.email))}
+										className="cursor-pointer mx-4 text-gray-600 dark:text-gray-200"
+									/>
 								</td>
-								<td className={`px-4 py-2 border-gray-700 border-b`}>
+								<td className={`px-4 py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-gray-700 border-b`}>
 									<span className={`${lead?.sourceColor} flex justify-center text-xs font-semibold w-full text-center py-[5px] rounded`}>
 										{lead.source}
 									</span>
 								</td>
-								<td className="px-4 py-2 border-gray-700 border-b relative">
+								<td className="px-4 py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-gray-700 border-b relative">
 									<MoreVert className="cursor-pointer" onClick={(event) => handleMenuOpen(event, lead._id)} />
 									<Menu
 										anchorEl={anchorEl}

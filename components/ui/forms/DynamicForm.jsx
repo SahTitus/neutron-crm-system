@@ -11,12 +11,13 @@ import { formFields } from '@lib/constants/inputFieldsData';
 import { createActivity } from '@redux/features/recentActivitySlice';
 import { Toast } from '@components/common/Toast';
 import { SpinnerOverlay } from '@components/common/loaders/SpinnerOverlay';
+import { sendEmail } from '@lib/sendEmail';
 
 export const DynamicForm = () => {
     const user = useSelector((state) => state.auth.user);
 
     const [showPassword, setShowPassword] = useState(false);
-    const { setShowLoaderOverlay, formType, formItemToEdit, setFormType, setFormSubmitted, setToastMsg, setBase64String } = useStateContext();
+    const { recepientEmail, setRecepientEmail, setShowLoaderOverlay, formType, formItemToEdit, setFormType, setFormSubmitted, setToastMsg, setBase64String } = useStateContext();
 
     const dispatch = useDispatch();
 
@@ -35,10 +36,20 @@ export const DynamicForm = () => {
     const currentFields = formFields[formType];
     const [initialState, setInitialState] = useState(currentFields.initialState);
 
+
     const handleSubmit = async (values, { resetForm }) => {
         setShowLoaderOverlay(true);
-
         try {
+            if (!!recepientEmail.length) {
+                const emailData = {
+                    ...values,
+                    recepientEmail,
+                    userCompanyId
+                }
+
+                await sendEmail(emailData)
+            }
+
             const result = await currentFields.action(values, userId, !!formItemToEdit)
 
             dispatch(currentFields.dispatch({ ...result, userCompanyId }, !!formItemToEdit));
@@ -48,7 +59,8 @@ export const DynamicForm = () => {
 
             // reset the form on successful submission
             resetForm({ values: initialState });
-            setBase64String('')
+            setBase64String('');
+            setRecepientEmail("");
             setFormSubmitted(true);
             setShowToast(true);
             setToastMsg(prevState => ({ ...prevState, message: `${formItemToEdit ? 'Update' : 'Post'} successful` }));
@@ -88,7 +100,7 @@ export const DynamicForm = () => {
                             key={type}
                             onClick={() => handleFormType(type)}
                             type="button"
-                            className={`w-32 ${formType === type ? 'bg-green-600 hover:bg-green-500 ' : 'bg-gray-800 hover:bg-gray-700 shadow-inner shadow-slate-500'} text-base text-gray-300 py-2 rounded-lg transition duration-300 `}
+                            className={`w-32 ${formType === type ? 'bg-green-600 hover:bg-green-500 text-white ' : 'bg-white border border-gray-400 dark:bg-gray-800 hover:bg-slate-100 dark:hover:bg-gray-700 dark:shadow-inner dark:shadow-slate-500'} text-base text-gray-800 dark:text-gray-300 py-2 rounded-lg transition duration-300 `}
                             label={type.charAt(0).toUpperCase() + type.slice(1)}
                             ariaLabel={`${type} form button`}
                             disabled={false}
@@ -102,7 +114,7 @@ export const DynamicForm = () => {
                             key={type}
                             onClick={() => handleFormType(type)}
                             type="button"
-                            className={`w-32 ${formType === type ? 'bg-green-600 hover:bg-green-500 ' : 'bg-gray-800 hover:bg-gray-700 shadow-inner shadow-slate-500'} text-base text-gray-300 py-2 rounded-lg transition duration-300 `}
+                            className={`w-32 ${formType === type ? 'bg-green-600 hover:bg-green-500 text-white ' : 'bg-white border border-gray-400 dark:bg-gray-800 hover:bg-slate-100 dark:hover:bg-gray-700 dark:shadow-inner dark:shadow-slate-500'} text-base text-gray-800 dark:text-gray-300 py-2 rounded-lg transition duration-300 `}
                             label={type.charAt(0).toUpperCase() + type.slice(1)}
                             ariaLabel={`${type} form button`}
                             disabled={false}

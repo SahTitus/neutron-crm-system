@@ -49,7 +49,7 @@ export const CampaigPage = ({ data }) => {
 					bg_textStyles='bg-red-200 text-gray-800' />
 			</div>
 			<div className="flex  w-full gap-4 mt-3 h-full">
-				<div className="w-3/5 h-full bg-gray-800 rounded-lg p-2 ">
+				<div className="w-3/5 h-full shadow-sm shadow-gray-400 bg-slate-100 dark:bg-gray-800 rounded-2xl">
 					<CampaignList
 						campaigns={campaigns}
 						currentPage={currentPage}
@@ -59,7 +59,7 @@ export const CampaigPage = ({ data }) => {
 						dispatch={dispatch}
 					/>
 				</div>
-				<div className="w-2/5 h-[400px] bg-gray-800 rounded-lg p-2">
+				<div className="w-2/5 h-[400px] bg-white shadow-sm shadow-gray-400 dark:bg-gray-800 rounded-lg p-2">
 					<CampaignPieChart
 						totalSent={metrics?.totalSent}
 						totalOpened={metrics?.totalOpened}
