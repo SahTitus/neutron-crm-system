@@ -13,7 +13,6 @@ import { logger } from '@utils/helpers/log';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchQueryDataFailure, fetchQueryDataStart, fetchQueryDataSuccess } from '@redux/features/querySlice';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { Thinking } from '@components/common/loaders/Thinking';
 
 const SearchBox = () => {
     const router = useRouter();

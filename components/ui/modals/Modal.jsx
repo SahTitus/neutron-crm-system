@@ -6,8 +6,13 @@ import { formModalStyles } from '@styles/styles';
 import { useStateContext } from '@redux/StateProvider';
 import { DynamicForm } from '../forms/DynamicForm';
 import { Icon } from '@components/common/Icon';
-import { SearchBox } from '../forms/SearchBox';
 import { SearchResultsContainer } from '@components/pages/search/SearchResultsContainer';
+import dynamic from 'next/dynamic';
+import { Thinking } from '@components/common/loaders/Thinking';
+
+const SearchBox = dynamic(() => import("@components/ui/forms/SearchBox"),
+	{ ssr: false, loading: () => <Thinking bgColor={false} /> },
+);
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide ref={ref} {...props} />;

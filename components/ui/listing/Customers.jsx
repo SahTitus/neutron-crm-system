@@ -160,7 +160,7 @@ export const CustomersList = ({ showPagination, customers, currentPage, totalPag
                                 </td>
                                 <td className="px-4 py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-b">{customer.country}</td>
                                 <td className="px-4 py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-b">
-                                    <a href={`tel:${customer.phoneNumber}`} className="text-gray-200">
+                                    <a href={`tel:${customer.phoneNumber}`} >
                                         <span className="sr-only">Telephone Number</span>
                                         <Call className="cursor-pointer" />
                                     </a>

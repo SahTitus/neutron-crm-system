@@ -36,8 +36,18 @@ export const convertImageToBase64 = (file) =>
         reader.onerror = (error) => reject(error);
     });
 
+export const handleOpenCampaignModal = (setFormType, toggleSideModal) => {
+    setFormType('campaign');
+    toggleSideModal('dynamicForm')
+}
 
-    export const handleOpenCampaignModal = (setFormType, toggleSideModal) => {
-        setFormType('campaign');
-        toggleSideModal('dynamicForm')
+// Function to format numbers with K and M suffixes
+export const formatNumber = (value) => {
+    if (value >= 1_000_000) {
+        return `${(value / 1_000_000).toFixed(1)}M`;
+    } else if (value >= 1_000) {
+        return `${(value / 1_000).toFixed(1)}K`;
+    } else {
+        return value.toString();
     }
+};

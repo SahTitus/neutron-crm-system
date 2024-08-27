@@ -165,7 +165,7 @@ export const OpportunitiesList = ({ showPagination, opportunities, currentPage, 
 								</td>
 								<td className="px-4 py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-b">{formatDate(opportunity.closeDate)}</td>
 								<td className="px-4 py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-b">
-									<a href={`tel:${opportunity.phoneNumber}`} className="text-gray-200">
+									<a href={`tel:${opportunity.phoneNumber}`} >
 										<span className="sr-only">Telephone Number</span>
 										<Call className="cursor-pointer" />
 									</a>

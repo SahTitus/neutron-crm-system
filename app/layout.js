@@ -26,7 +26,7 @@ export const metadata = {
       rel: routes?.neutronIcon,
       url: routes?.neutronIcon,
     },
-    // category: 'Website',
+    category: 'Website',
   },
   robots: seoRobot_config,
 }

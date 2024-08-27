@@ -20,14 +20,17 @@ export const useConfirmationModal = () => {
         if (!isModalOpen) return null;
 
         return (
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="bg-white rounded-lg shadow-lg p-6 max-w-sm w-full">
+            <div 
+                className="fixed inset-0 z-50 flex items-center justify-center"
+                style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }} // Semi-transparent black background
+            >
+                <div className="flex flex-col justify-center bg-white rounded-lg shadow-lg py-4 px-6 max-w-sm h-[150px] ">
                     <p className="text-gray-800 text-lg">{modalConfig.message}</p>
-                    <div className="flex justify-end mt-6">
+                    <div className="flex justify-end mt-4">
                         <button
                             onClick={closeModal}
-                            className="bg-gray-200 text-gray-800 px-4 py-2 rounded mr-2 hover:bg-gray-300 cursor-pointer"
-                            	aria-label='Cancel process'
+                            className="bg-gray-200 text-gray-800 px-4 py-2 rounded mr-2 hover:bg-gray-300"
+                            aria-label="Cancel process"
                         >
                             Cancel
                         </button>
@@ -36,8 +39,8 @@ export const useConfirmationModal = () => {
                                 await modalConfig.onConfirm();
                                 closeModal();
                             }}
-                            className={`${modalConfig.bgStyles} text-white px-4 py-2 rounded cursor-pointer`}
-                            aria-label='Confirm process'
+                            className={`${modalConfig.bgStyles} text-white px-4 py-2 rounded`}
+                            aria-label="Confirm process"
                         >
                             Confirm
                         </button>

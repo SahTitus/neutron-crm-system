@@ -155,7 +155,7 @@ export const LeadsList = ({ showPagination, leads, currentPage, totalPages, disp
 									{lead.phoneNumber}
 								</td>
 								<td className="px-4 py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-gray-700 border-b">
-									<a href={`tel:${lead.phoneNumber}`} className="text-gray-200">
+									<a href={`tel:${lead.phoneNumber}`} >
 										<span className="sr-only">Telephone Number</span>
 										<Call className="cursor-pointer" />
 									</a>
