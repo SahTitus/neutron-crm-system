@@ -115,6 +115,7 @@ export const LeadsList = ({ showPagination, leads, currentPage, totalPages, disp
 					<ExportFileButton
 						data={updatedLeads}
 						pathname='Leads'
+						aria-label='Export as file'
 						querySelectorForImg='table'
 					/>) : (
 					<Link href={routes.sales} className="bg-orange-300 text-gray-800 p-2 rounded-md hover:bg-orange-200">
@@ -141,7 +142,7 @@ export const LeadsList = ({ showPagination, leads, currentPage, totalPages, disp
 						{updatedLeads?.map((lead) => (
 							<tr key={lead._id}>
 								<td className="px-4 py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-gray-700 border-b">
-									<Image src={lead.image} alt="avatar" width={40} height={40} className="rounded-full w-10 h-10" />
+									<Image src={lead.image} alt={`${lead.firstName} avatar`} width={40} height={40} className="rounded-full w-10 h-10" />
 								</td>
 								<td className="px-4 py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-gray-700 border-b">{`${lead.firstName} ${lead.lastName}`}</td>
 								<td className="px-4 py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-gray-700 border-b">{lead.email}</td>
@@ -154,7 +155,8 @@ export const LeadsList = ({ showPagination, leads, currentPage, totalPages, disp
 									{lead.phoneNumber}
 								</td>
 								<td className="px-4 py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-gray-700 border-b">
-									<a aria-label="Telephone" href={`tel:${lead.phoneNumber}`} className="text-gray-600 dark:text-gray-200">
+									<a href={`tel:${lead.phoneNumber}`} className="text-gray-200">
+										<span className="sr-only">Telephone Number</span>
 										<Call className="cursor-pointer" />
 									</a>
 									<Email

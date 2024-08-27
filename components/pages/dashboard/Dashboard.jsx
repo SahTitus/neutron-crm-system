@@ -121,7 +121,6 @@ export const Dashboard = ({ metrics, data }) => {
                     />
                 </div>
             </div>
-
             <ScrollToTop />
         </div>
     );

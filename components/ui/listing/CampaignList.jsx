@@ -15,7 +15,6 @@ export const CampaignList = ({ campaigns, showPagination, currentPage, totalPage
 	const [selectedCampaignId, setSelectedCampaignId] = useState(null);
 	const user = useSelector((state) => state.auth.user);
 
-
 	const { toggleConfirmationModal, ConfirmationModal } = useConfirmationModal();
 	const { setShowToast, setToastMsg, } = useStateContext();
 

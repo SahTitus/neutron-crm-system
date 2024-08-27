@@ -88,7 +88,7 @@ export const Dropzone = ({ values, height, isSignUp }) => {
                     <Image
                         className={`rounded-full w-[150px] h-[150px] object-cover`}
                         src={base64String}
-                        alt={`image`}
+                        alt={`image to be uploaded`}
                         width={150}
                         height={150}
                         priority

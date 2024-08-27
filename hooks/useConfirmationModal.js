@@ -27,6 +27,7 @@ export const useConfirmationModal = () => {
                         <button
                             onClick={closeModal}
                             className="bg-gray-200 text-gray-800 px-4 py-2 rounded mr-2 hover:bg-gray-300 cursor-pointer"
+                            	aria-label='Cancel process'
                         >
                             Cancel
                         </button>
@@ -36,6 +37,7 @@ export const useConfirmationModal = () => {
                                 closeModal();
                             }}
                             className={`${modalConfig.bgStyles} text-white px-4 py-2 rounded cursor-pointer`}
+                            aria-label='Confirm process'
                         >
                             Confirm
                         </button>

@@ -6,6 +6,7 @@ import { createActivity } from "./recentActivity.action";
 import Task from "@db/models/task.model";
 import User from "@db/models/user.model";
 import mongoose from "mongoose";
+import Employee from "@db/models/employee.model";
 
 export const createTask = async (taskData, adminId) => {
     try {

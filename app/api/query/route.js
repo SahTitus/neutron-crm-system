@@ -12,9 +12,6 @@ export async function POST(req) {
 
 		const { companyId } = filters;
 
-		console.log(query)
-		console.log(filters)
-
 		if (!companyId) {
 			throw new Error("Unauthorized access");
 		}

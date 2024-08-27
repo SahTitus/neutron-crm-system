@@ -119,6 +119,7 @@ export const OpportunitiesList = ({ showPagination, opportunities, currentPage, 
 						data={updatedOpportunities}
 						pathname='Opportunities'
 						querySelectorForImg='table'
+						aria-label='Export as file'
 					/>) : (
 					<Link href={`${routes.sales}/#opportunities`} className="bg-orange-300 text-gray-800 p-2 rounded-md hover:bg-orange-200">
 						View more
@@ -146,7 +147,7 @@ export const OpportunitiesList = ({ showPagination, opportunities, currentPage, 
 						{updatedOpportunities?.map((opportunity, index) => (
 							<tr key={`${opportunity._id}+${index}`}>
 								<td className="px-4 py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-b">
-									{!!opportunity?.image && <Image src={opportunity?.image} alt="avatar" width={40} height={40} className="rounded-full w-10 h-10" />}
+									{!!opportunity?.image && <Image src={opportunity?.image} alt={`${opportunity.firstName} avatar`} width={40} height={40} className="rounded-full w-10 h-10" />}
 								</td>
 								<td className="px-4 py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-b">{`${opportunity.firstName} ${opportunity.lastName}`}</td>
 								<td className="px-4 py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-b">{opportunity.email}</td>
@@ -164,13 +165,14 @@ export const OpportunitiesList = ({ showPagination, opportunities, currentPage, 
 								</td>
 								<td className="px-4 py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-b">{formatDate(opportunity.closeDate)}</td>
 								<td className="px-4 py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-b">
-									<a aria-label="Telephone" href={`tel:${opportunity.phoneNumber}`} className="text-gray-200">
+									<a href={`tel:${opportunity.phoneNumber}`} className="text-gray-200">
+										<span className="sr-only">Telephone Number</span>
 										<Call className="cursor-pointer" />
 									</a>
 									<Email
-                                        onClick={() => handleOpenCampaignModal(setFormType, toggleSideModal, setRecepientEmail(opportunity?.email))}
-                                        className="cursor-pointer mx-4"
-                                    />
+										onClick={() => handleOpenCampaignModal(setFormType, toggleSideModal, setRecepientEmail(opportunity?.email))}
+										className="cursor-pointer mx-4"
+									/>
 								</td>
 								<td className="px-4 py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-b relative">
 									<MoreVert className="cursor-pointer" onClick={(event) => handleMenuOpen(event, opportunity._id)} />

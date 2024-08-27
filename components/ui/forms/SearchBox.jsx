@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, Suspense } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import Mic from '@mui/icons-material/Mic';
 import { RiEqualizerLine } from 'react-icons/ri';
@@ -13,8 +13,9 @@ import { logger } from '@utils/helpers/log';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchQueryDataFailure, fetchQueryDataStart, fetchQueryDataSuccess } from '@redux/features/querySlice';
 import { useSearchParams, useRouter } from 'next/navigation';
+import { Thinking } from '@components/common/loaders/Thinking';
 
-export const SearchBox = () => {
+const SearchBox = () => {
     const router = useRouter();
     const dispatch = useDispatch();
     const timeoutRef = useRef(null);
@@ -117,67 +118,74 @@ export const SearchBox = () => {
     }, [isModalOpen]);
 
     useEffect(() => {
-        setSearchTerm(query)
+        if (!!query?.length) {
+            setSearchTerm(query)
+        }
     }, [query]);
 
 
     return (
-        <form onSubmit={handleSearch}>
-            <div>
-                <div className="flex text-center w-full max-w-80 items-center border border-gray-300 dark:border-none dark:bg-slate-700 shadow-slate-400 bg-white rounded-full px-4 py-1">
-                    <Icon title="Search" onClick={handleSearch} ariaLabel={'Search icon'} className="text-gray-400 mr-2">
-                        <SearchIcon />
-                    </Icon>
-                    <input
-                        type="text"
-                        placeholder="Search"
-                        value={searchTerm}
-                        onChange={handleInputChange}
-                        className="outline-none bg-transparent text-gray-700 dark:text-gray-200 w-full"
-                    />
-                    {!settings?.hideVoiceAssistant &&
-                        <Icon
-                            title='Voice Assistant'
-                            onClick={handleMicClick}
-                            ariaLabel={'Microphone icon'}
-                            className="text-gray-400 mr-1">
-                            <Mic />
-                        </Icon>}
+        <Suspense>
+            <form onSubmit={handleSearch}>
+                <div>
+                    <div className="flex text-center w-full max-w-80 items-center border border-gray-300 dark:border-none dark:bg-slate-700 shadow-slate-400 bg-white rounded-full px-4 py-1">
+                        <Icon title="Search" onClick={handleSearch} ariaLabel={'Search icon'} className="text-gray-400 mr-2">
+                            <SearchIcon />
+                        </Icon>
+                        <input
+                            type="text"
+                            placeholder="Search"
+                            value={searchTerm}
+                            onChange={handleInputChange}
+                            className="outline-none bg-transparent text-gray-700 dark:text-gray-200 w-full"
+                        />
+                        {!settings?.hideVoiceAssistant &&
+                            <Icon
+                                title='Voice Assistant'
+                                onClick={handleMicClick}
+                                ariaLabel={'Microphone icon'}
+                                className="text-gray-400 mr-1">
+                                <Mic />
+                            </Icon>}
 
-                    <Icon title='Filter' ariaLabel={'Filter icon'} onClick={handleFilter} className="text-gray-400 mr-1">
-                        <RiEqualizerLine />
-                    </Icon>
-                </div>
-            </div>
-            <FilterMenu
-                filters={filters}
-                anchorEl={anchorEl}
-                setFilters={setFilters}
-                onClose={handleMenuClose}
-                initialFilters={initialFilters}
-            />
-
-            {isModalOpen && (
-                <div className="fixed inset-0 flex items-center justify-center z-50">
-                    <div className="flex flex-col bg-white dark:bg-slate-700 p-6 rounded-lg shadow-lg w-4/5 max-w-md">
-                        <h2 className="text-lg font-bold mb-4 text-gray-800 dark:text-white">Listening...</h2>
-                        <div className="flex items-center justify-center space-x-2 mb-4">
-                            <div className={`w-2 h-10 bg-green-500 ${listening ? 'animate-pulse' : ''}`}></div>
-                            <div className={`w-2 h-10 bg-green-500 ${listening ? 'animate-pulse' : ''}`}></div>
-                            <div className={`w-2 h-10 bg-green-500 ${listening ? 'animate-pulse' : ''}`}></div>
-                            <div className={`w-2 h-10 bg-green-500 ${listening ? 'animate-pulse' : ''}`}></div>
-                            <div className={`w-2 h-10 bg-green-500 ${listening ? 'animate-pulse' : ''}`}></div>
-                        </div>
-                        <p className="text-gray-800 dark:text-gray-200">{transcript}</p>
-                        <button
-                            className="mt-4 ml-auto bg-red-500 text-white px-4 py-2 rounded-full"
-                            onClick={handleCloseModal}
-                        >
-                            Close
-                        </button>
+                        <Icon title='Filter' ariaLabel={'Filter icon'} onClick={handleFilter} className="text-gray-400 mr-1">
+                            <RiEqualizerLine />
+                        </Icon>
                     </div>
                 </div>
-            )}
-        </form>
+                <FilterMenu
+                    filters={filters}
+                    anchorEl={anchorEl}
+                    setFilters={setFilters}
+                    onClose={handleMenuClose}
+                    initialFilters={initialFilters}
+                />
+
+                {isModalOpen && (
+                    <div className="fixed inset-0 flex items-center justify-center z-50">
+                        <div className="flex flex-col bg-white dark:bg-slate-700 p-6 rounded-lg shadow-lg w-4/5 max-w-md">
+                            <h2 className="text-lg font-bold mb-4 text-gray-800 dark:text-white">Listening...</h2>
+                            <div className="flex items-center justify-center space-x-2 mb-4">
+                                <div className={`w-2 h-10 bg-green-500 ${listening ? 'animate-pulse' : ''}`}></div>
+                                <div className={`w-2 h-10 bg-green-500 ${listening ? 'animate-pulse' : ''}`}></div>
+                                <div className={`w-2 h-10 bg-green-500 ${listening ? 'animate-pulse' : ''}`}></div>
+                                <div className={`w-2 h-10 bg-green-500 ${listening ? 'animate-pulse' : ''}`}></div>
+                                <div className={`w-2 h-10 bg-green-500 ${listening ? 'animate-pulse' : ''}`}></div>
+                            </div>
+                            <p className="text-gray-800 dark:text-gray-200">{transcript}</p>
+                            <button
+                                className="mt-4 ml-auto bg-red-500 text-white px-4 py-2 rounded-full"
+                                onClick={handleCloseModal}
+                                aria-label='Close voice modal'
+                            >
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                )}
+            </form>
+        </Suspense>
     );
 };
+
+export default SearchBox;

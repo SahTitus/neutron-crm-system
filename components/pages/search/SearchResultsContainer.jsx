@@ -7,7 +7,6 @@ import { useSelector } from 'react-redux'
 
 export const SearchResultsContainer = () => {
 	const { queryData, isLoading, error, } = useSelector((state) => state.query);
-	console.log(queryData)
 
 	return (
 		<>

@@ -6,7 +6,12 @@ import { Button } from '@components/common/Button';
 import { useSelector } from 'react-redux';
 import { AvatarIcon } from '@components/common/Avatar';
 import ThemeToggle from '@components/features/ThemeToggle';
-import { SearchBox } from '@components/ui/forms/SearchBox';
+import dynamic from 'next/dynamic';
+import { Thinking } from '@components/common/loaders/Thinking';
+
+const SearchBox = dynamic(() => import("@components/ui/forms/SearchBox"),
+	{ ssr: false, loading: () => <Thinking bgColor={false} /> },
+);
 
 export const Navbar = () => {
     const user = useSelector((state) => state.auth.user);

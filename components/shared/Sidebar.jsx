@@ -65,7 +65,7 @@ export const Sidebar = () => {
         <div className={`sticky top-0 ${hideSide ? 'hidden' : 'flex'} flex-col bg-white dark:bg-[#192037] gap-5 ${isCollapsed ? 'w-[130px]' : 'sm:w-[200px] md:w-[250px]'} h-screen py-4 px-4 transition-all duration-300`}>
             <div className={`flex justify-between items-center w-full ${isCollapsed ? 'justify-center' : ''}`}>
                 <Link href='/'>
-                    <p className={` flex text-center  text-[#0DD983] custom-3d ${isCollapsed ? 'text-2xl -ml-[2px]' : 'text-3xl '} font-extrabold tracking-wide select-none`}>Neutron</p>
+                    <p className={` flex text-center text-[#0DD983] custom-3d ${isCollapsed ? 'text-2xl -ml-[2px]' : 'text-3xl '} font-extrabold tracking-wide select-none`}>Neutron</p>
                 </Link>
 
             </div>
@@ -87,12 +87,13 @@ export const Sidebar = () => {
                 </div>
             </div>
             <Tooltip title={`${isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'} `} arrow>
-                <div
+                <button
                     onClick={toggleSidebar}
-                    className={`absolute bottom-8 -right-5 flex items-center justify-center text-gray-700 bg-gray-300 shadow-md shadow-slate-500 dark:bg-gray-800 dark:shadow-inner h-11 w-11 dark:shadow-slate-500 rounded-full text-3xl  dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 cursor-pointer`}
+                    className={`absolute bottom-8 -right-5 z-50 flex items-center justify-center text-gray-700 bg-gray-300 shadow-md shadow-slate-500 dark:bg-gray-800 dark:shadow-inner h-11 w-11 dark:shadow-slate-500 rounded-full text-3xl  dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 cursor-pointer`}
+                    aria-label='Toggle sidebar'
                 >
                     {isCollapsed ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
-                </div>
+                </button>
             </Tooltip>
         </div>
     );

@@ -13,8 +13,8 @@ import {
   Filler,
 } from 'chart.js';
 import { useTheme } from '@components/features/ThemeProvider';
-import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { FaImage } from "react-icons/fa6";
 
 // Register the components and the annotation plugin
 ChartJS.register(
@@ -36,11 +36,11 @@ const Chart = ({ dataSets, labels, excludedKey }) => {
   const { theme } = useTheme();
 
   const transformedDataSets = Object.keys(dataSets)
-  .filter(key => key !== excludedKey) // Exclude the specified key
-  .map(key => ({
-    key: key,
-    value: dataSets[key]
-  }));
+    .filter(key => key !== excludedKey) // Exclude the specified key
+    .map(key => ({
+      key: key,
+      value: dataSets[key]
+    }));
 
   const createGradient = (ctx, area, color) => {
     const gradient = ctx.createLinearGradient(0, area.bottom, 0, area.top);
@@ -51,7 +51,7 @@ const Chart = ({ dataSets, labels, excludedKey }) => {
 
   const filterDataByDateRange = (data, startDate, endDate) => {
     const filteredData = data?.filter((_, index) => {
-      const date = new Date(2023, index, 1); // Assuming monthly data for 2023
+      const date = new Date(2023, index, 1);
       return date >= startDate && date <= endDate;
     });
     return filteredData;
@@ -59,7 +59,7 @@ const Chart = ({ dataSets, labels, excludedKey }) => {
 
   const data = {
     labels: labels.filter((_, index) => {
-      const date = new Date(2023, index, 1); // Assuming monthly data for 2023
+      const date = new Date(2023, index, 1);
       return date >= startDate && date <= endDate;
     }),
     datasets: [
@@ -175,7 +175,7 @@ const Chart = ({ dataSets, labels, excludedKey }) => {
     if (chartRef.current) {
       const link = document.createElement('a');
       link.href = chartRef.current.toBase64Image();
-      link.download = 'chart.png';
+      link.download = 'Monthly_Data_Chart.png';
       link.click();
     }
   };
@@ -192,45 +192,13 @@ const Chart = ({ dataSets, labels, excludedKey }) => {
   }, [theme]);
 
   return (
-    <div className={`bg-slate-100 shadow-sm shadow-slate-400 dark:shadow-2xl dark:shadow-slate-800 dark:bg-gray-900 w-full p-2 ${theme === 'light' ? 'bg-white' : 'bg-gray-900'} rounded-lg shadow-lg h-full`}>
-      {/* <div className="flex justify-between mb-4 w-full h-full"> */}
-      {/* <label className="flex items-center">
-          <input
-            type="checkbox"
-            checked={showGridLines}
-            onChange={() => setShowGridLines(!showGridLines)}
-            className="mr-2"
-          />
-          <span className={theme === 'light' ? 'text-black' : 'text-white'}>Show Grid Lines</span>
-        </label> */}
-      {/* <DatePicker
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
-          selectsStart
-          startDate={startDate}
-          endDate={endDate}
-          dateFormat="MMMM yyyy"
-          showMonthYearPicker
-          className={`p-2 rounded-md focus:outline-none ${theme === 'light' ? 'bg-green-500 text-white' : 'bg-gray-700 text-white'}`}
-        /> */}
-      {/* <DatePicker
-          selected={endDate}
-          onChange={(date) => setEndDate(date)}
-          selectsEnd
-          startDate={startDate}
-          endDate={endDate}
-          minDate={startDate}
-          dateFormat="MMMM yyyy"
-          showMonthYearPicker
-          className={`p-2 rounded-md focus:outline-none ${theme === 'light' ? 'bg-green-500 text-white' : 'bg-gray-700 text-white'}`}
-        /> */}
-      {/* </div> */}
-      {/* <button
+    <div className={`relative bg-slate-100 shadow-sm shadow-slate-400 dark:shadow-2xl dark:shadow-slate-800 dark:bg-gray-900 w-full p-2 ${theme === 'light' ? 'bg-white' : 'bg-gray-900'} rounded-lg shadow-lg h-full`}>
+      <button
         onClick={downloadImage}
-        className={`p-2 rounded-md ${theme === 'light' ? 'bg-green-500 text-white' : 'bg-gray-700 text-white'}`}
-      >
-        Download Chart
-      </button> */}
+        className={`absolute flex items-center right-4 top-4 py-2 px-4 rounded-md bg-red-200 text-red-800 text-sm`}
+        aria-label='Export as a file'>
+        <FaImage className="mr-2" /> Export
+      </button>
 
       <Line ref={chartRef} id="chart" className="h-full" options={options} data={data} />
     </div>

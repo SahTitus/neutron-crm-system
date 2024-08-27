@@ -1,6 +1,4 @@
 "use client";
-import { MoreVert } from "@mui/icons-material";
-import { Menu, MenuItem, IconButton } from "@mui/material";
 import Image from "next/image";
 import { formatDate } from "@utils/helpers/formatDate";
 import { useState } from "react";
@@ -16,7 +14,7 @@ export const SearchResultsCard = ({ type, item}) => {
         {item?.image && (
           <Image
             src={item?.image}
-            alt="avatar"
+            alt={`${item?.image} image`}
             width={50}
             height={50}
             className="rounded-full w-12 h-12 mr-4"

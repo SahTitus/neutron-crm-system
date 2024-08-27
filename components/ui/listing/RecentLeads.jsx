@@ -27,8 +27,8 @@ export const RecentLeads = ({ leads, onPageChange }) => {
             <div className="flex items-center justify-between mb-4">
                 <h2 className="text-lg font-semibold dark:text-white text-gray-800">Recent Leads</h2>
                 <Link href={`${routes.sales}/#leads`} className="bg-orange-300 text-gray-800 p-2 rounded-md hover:bg-orange-200">
-                        View more
-                    </Link>
+                    View more
+                </Link>
             </div>
             <ul className="space-y-3 relative overflow-y-auto px-2 custom-scrollbar h-full pb-12">
                 {updatedLeads?.map((lead, index) => (
@@ -46,6 +46,7 @@ export const RecentLeads = ({ leads, onPageChange }) => {
             </ul>
             <div className="flex justify-between items-center mt-4">
                 <button
+                    aria-label='Previous list'
                     className="p-2 rounded-full bg-gray-800 text-white hover:bg-gray-700"
                     onClick={() => handlePageChange(currentPage - 1)}
                     disabled={currentPage === 1}
@@ -56,6 +57,7 @@ export const RecentLeads = ({ leads, onPageChange }) => {
                     Page {currentPage} of {leads.totalPages}
                 </span>
                 <button
+                    aria-label='Next list'
                     className="p-2 rounded-full bg-gray-800 text-white hover:bg-gray-700"
                     onClick={() => handlePageChange(currentPage + 1)}
                     disabled={currentPage === leads.totalPages}

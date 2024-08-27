@@ -6,7 +6,7 @@ export const AuthLandingPage = () => {
         <div className="relative flex w-1/2 h-full">
             <Image
                 src="/assets/images/happy-customer6.jpg"
-                alt="Background"
+                alt="happy-customer"
                 fill
                 className='object-cover'
             />

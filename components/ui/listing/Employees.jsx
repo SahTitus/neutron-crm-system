@@ -97,7 +97,7 @@ export const Employees = () => {
         <div className="flex flex-col p-4 bg-gray-900 rounded-lg shadow text-gray-400 ">
             <div className="flex items-center justify-between">
                 <h2 className="text-lg font-semibold">Employees</h2>
-                <button className="p-2 rounded-full hover:bg-gray-700">
+                <button className="p-2 rounded-full hover:bg-gray-700" aria-label='View more employees'             >
                     View more
                 </button>
             </div>

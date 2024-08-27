@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, } from 'react';
 import { useRouter } from 'next/navigation';
 import ThemeToggle from '@components/features/ThemeToggle';
 import Image from 'next/image';
@@ -54,7 +54,6 @@ const SettingsPage = ({ user }) => {
 	};
 
 	return (
-		<div className="p-6 bg-slate-100 dark:bg-gray-900 min-h-screen flex justify-center items-center">
 			<div className="w-full min-w-[500px] max-w-4xl bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden">
 				{/* Profile Section */}
 				<div className="flex flex-col items-center p-6 bg-gray-200 dark:bg-gray-700">
@@ -71,6 +70,7 @@ const SettingsPage = ({ user }) => {
 					<p className="text-sm text-gray-600 dark:text-gray-300">{user?.email}</p>
 					<p className="text-sm text-gray-600 dark:text-gray-300">{user?.phoneNumber}</p>
 					<button
+						aria-label='Edit Profile'
 						className="mt-4 px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors"
 						onClick={handleEditProfile}
 					>
@@ -140,7 +140,6 @@ const SettingsPage = ({ user }) => {
 					</div>
 				</div>
 			</div>
-		</div>
 	);
 };
 

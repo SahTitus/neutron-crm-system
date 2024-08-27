@@ -61,11 +61,11 @@ const taskDescriptions = [
 
 
 const generateCampaign = () => ({
-  name: faker.company.catchPhrase(),
-  startDate: faker.date.future(),
-  endDate: faker.date.future(),
-  subject: faker.company.bsBuzz(),
-  content: `
+    name: faker.company.catchPhrase(),
+    startDate: faker.date.future(),
+    endDate: faker.date.future(),
+    subject: faker.company.bsBuzz(),
+    content: `
 Dear Customer,
 
 We are excited to introduce our latest campaign aimed at enhancing your experience with our services. Our goal is to provide you with exceptional value and support. 
@@ -82,10 +82,10 @@ Thank you for being a valued customer.
 Best regards,
 The CRM Team
 `,
-  sent_count: faker.datatype.number({ min: 0, max: 100 }),
-  open_count: faker.datatype.number({ min: 0, max: 100 }),
-  click_count: faker.datatype.number({ min: 0, max: 100 }),
-  createdAt: faker.date.past()
+    sent_count: faker.datatype.number({ min: 0, max: 100 }),
+    open_count: faker.datatype.number({ min: 0, max: 100 }),
+    click_count: faker.datatype.number({ min: 0, max: 100 }),
+    createdAt: faker.date.past()
 });
 
 // function generateGhanaPhoneNumber() {
@@ -137,15 +137,15 @@ const generateOpportunity = (img) => ({
     companyId: '6692a56c72e3572efd896afd', // Generates a new ObjectId
     phoneNumber: generateGhanaPhoneNumber(),
     notes: generateMeaningfulNote(),
-  });
-  
-  // Function to generate a valid Ghanaian phone number
-  function generateGhanaPhoneNumber() {
+});
+
+// Function to generate a valid Ghanaian phone number
+function generateGhanaPhoneNumber() {
     const prefixes = ['24', '26', '27', '50', '54', '55', '56', '57', '59', '20', '23', '28', '29'];
     const randomPrefix = faker.helpers.arrayElement(prefixes); // Select a random prefix
     const randomDigits = faker.random.numeric(7); // Generate 7 random digits
     return `0${randomPrefix}${randomDigits}`;
-  }
+}
 
 //   // Function to generate a meaningful note
 // function generateMeaningfulNote() {
@@ -158,7 +158,7 @@ const generateOpportunity = (img) => ({
 //       'indicating a positive outlook for future negotiations.',
 //       'and determined next steps for proposal development.',
 //     ];
-    
+
 //     // Construct a meaningful sentence by combining action, target, and outcome
 //     return `${faker.helpers.arrayElement(actions)} ${faker.helpers.arrayElement(targets)} ${faker.helpers.arrayElement(outcomes)}`;
 //   }
@@ -181,7 +181,7 @@ function generateRandomDate() {
     const randomDate = faker.date.between({ from: startDate, to: endDate });
     return randomDate.toISOString().split('T')[0]; // Convert to YYYY-MM-DD format
 }
-  
+
 
 // Function to generate multiple campaigns
 const generateCustomers = (count) => {
@@ -200,14 +200,17 @@ const CampaignUploader = () => {
         const campaigns = generateCustomers(100);
         try {
             const response = await createMultipleCampaigns(campaigns, userId);
-    
+
         } catch (error) {
             console.error('Error uploading campaigns:', error);
         }
     };
 
     return (
-        <button className='bg-red-500' onClick={handleUpload}>
+        <button
+            aria-label='Generate and Upload many data'
+            className='bg-red-500'
+            onClick={handleUpload}>
             Generate and Upload Campaigns
         </button>
     );

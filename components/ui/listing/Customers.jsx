@@ -117,6 +117,7 @@ export const CustomersList = ({ showPagination, customers, currentPage, totalPag
                         data={updatedCustomers}
                         pathname='Customers'
                         querySelectorForImg='table'
+                        aria-label='Export as a file'
                     />) : (
                     <Link href={`${routes.customers}/#customers`} className="bg-orange-300 text-gray-800 p-2 rounded-md hover:bg-orange-200">
                         View more
@@ -144,7 +145,7 @@ export const CustomersList = ({ showPagination, customers, currentPage, totalPag
                         {updatedCustomers?.map((customer) => (
                             <tr key={customer._id}>
                                 <td className="px-4 py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-b">
-                                    <Image src={customer.image} alt="avatar" width={40} height={40} className="rounded-full w-10 h-10" />
+                                    <Image src={customer.image} alt={`${customer.firstName} avatar`} width={40} height={40} className="rounded-full w-10 h-10" />
                                 </td>
                                 <td className="px-4 py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-b">{`${customer.firstName} ${customer.lastName}`}</td>
                                 <td className="px-4 py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-b">{customer.email}</td>
@@ -159,9 +160,11 @@ export const CustomersList = ({ showPagination, customers, currentPage, totalPag
                                 </td>
                                 <td className="px-4 py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-b">{customer.country}</td>
                                 <td className="px-4 py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-b">
-                                    <a aria-label="Telephone" href={`tel:${customer.phoneNumber}`} className="text-gray-200">
+                                    <a href={`tel:${customer.phoneNumber}`} className="text-gray-200">
+                                        <span className="sr-only">Telephone Number</span>
                                         <Call className="cursor-pointer" />
                                     </a>
+
                                     <Email
                                         onClick={() => handleOpenCampaignModal(setFormType, toggleSideModal, setRecepientEmail(customer?.email))}
                                         className="cursor-pointer mx-4"
