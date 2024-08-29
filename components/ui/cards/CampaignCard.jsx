@@ -50,7 +50,7 @@ export const CampaignCard = ({ campaign, anchorEl, handleMenuOpen, isSearch, han
             Subject: {campaign?.subject}
           </h4>
           <div
-            className={`${isSearch ? 'text-gray-300' : ''} prose dark:prose-invert prose-blue max-w-none mt-4 bg-gray-50 dark:bg-[#252f3f] p-4 rounded-xl`}
+            className={`${isSearch ? 'text-gray-800 dark:text-gray-300' : 'text-gray-800 dark:text-white'} prose dark:prose-invert prose-blue max-w-none mt-4 bg-gray-50 dark:bg-[#252f3f] p-4 rounded-xl`}
             dangerouslySetInnerHTML={{ __html: campaign?.content }}
           />
           <div className="mt-6 grid grid-cols-3 gap-4 text-sm text-gray-600 dark:text-gray-400">
