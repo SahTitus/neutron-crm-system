@@ -11,7 +11,7 @@ import dynamic from 'next/dynamic';
 import { Thinking } from '@components/common/loaders/Thinking';
 
 const SearchBox = dynamic(() => import("@components/ui/forms/SearchBox"),
-	{ ssr: false, loading: () => <Thinking bgColor={false} /> },
+	{ ssr: false },
 );
 
 const Transition = React.forwardRef(function Transition(props, ref) {
