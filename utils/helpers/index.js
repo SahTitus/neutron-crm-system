@@ -48,6 +48,6 @@ export const formatNumber = (value) => {
     } else if (value >= 1_000) {
         return `${(value / 1_000).toFixed(1)}K`;
     } else {
-        return value.toString();
+        return value.toFixed(1)?.toString();
     }
 };
