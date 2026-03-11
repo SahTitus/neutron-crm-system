@@ -54,6 +54,7 @@ export const registerUser = async (userData) => {
 
         return JSON.parse(JSON.stringify({ status: 200 }));
     } catch (error) {
+                console.log("😔😔😔",error)
         logger(error.message)
     }
 };

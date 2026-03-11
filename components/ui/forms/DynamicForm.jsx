@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { logger } from '@utils/helpers/log';
 import { Button } from '@components/common/Button';
 import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/navigation';
 import { useStateContext } from '@redux/StateProvider';
 import { formFields } from '@lib/constants/inputFieldsData';
 import { createActivity } from '@redux/features/recentActivitySlice';
@@ -20,6 +21,7 @@ export const DynamicForm = () => {
     const { recepientEmail, setRecepientEmail, setShowLoaderOverlay, formType, formItemToEdit, setFormType, setFormSubmitted, setToastMsg, setBase64String } = useStateContext();
 
     const dispatch = useDispatch();
+    const router = useRouter();
 
     const userId = user?.id;
     const userCompanyId = user?.companyId;
@@ -64,6 +66,9 @@ export const DynamicForm = () => {
             setFormSubmitted(true);
             setShowToast(true);
             setToastMsg(prevState => ({ ...prevState, message: `${formItemToEdit ? 'Update' : 'Post'} successful` }));
+
+            // Refresh server data so lists update immediately without manual reload
+            router.refresh();
         } catch (error) {
             setShowLoaderOverlay(false);
             setShowToast(true);

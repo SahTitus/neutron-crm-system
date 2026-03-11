@@ -40,7 +40,7 @@ const Icon = ({ error }) => {
 
 
 
-export const Toast = ({ styles = 'absolute top-10 left-1/2 bg-red-500' }) => {
+export const Toast = ({ styles = 'absolute top-10 left-1/2' }) => {
     const { setShowToast, showToast, toastMsg, } = useStateContext();
 
     return (
@@ -48,7 +48,7 @@ export const Toast = ({ styles = 'absolute top-10 left-1/2 bg-red-500' }) => {
             {showToast ? <div className={`transform -translate-x-1/2  text-white px-5 py-3 rounded shadow-lg z-50 ${styles} ${toastMsg.isError ? 'bg-red-500' : 'bg-green-500'}`}>
                 <p className="text-center">{toastMsg.message}</p>
                 <button
-                	aria-label='Close toast'
+                    aria-label='Close toast'
                     className="absolute top-1 right-1 text-white  hover:text-gray-200"
                     onClick={() => setShowToast(false)}
                 >

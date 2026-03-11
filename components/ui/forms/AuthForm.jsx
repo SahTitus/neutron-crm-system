@@ -23,11 +23,12 @@ export const AuthForm = ({ userId }) => {
     const router = useRouter();
     const dispatch = useDispatch();
     const [showPassword, setShowPassword] = useState(false);
+    const [redirecting, setRedirecting] = useState(false);
 
     const error = useSelector((state) => state.auth.error);
     const loading = useSelector((state) => state.auth.isLoading);
 
-    const { setShowLoaderOverlay, setShowToast, setToastMsg, setBase64String, isEditProfile, profileData, setEditProfile } = useStateContext();
+    const { setShowLoaderOverlay, setShowToast, setToastMsg, setToastPersist, setBase64String, isEditProfile, profileData, setEditProfile } = useStateContext();
     const [isSignUp, setIsSignUp] = useState(isEditProfile);
     const [initialState, setInitialState] = useState(signUpInitialValues)
 
@@ -60,6 +61,7 @@ export const AuthForm = ({ userId }) => {
                 //update users session
                 dispatch(updateProfile(updatedData));
                 setToastMsg(prevState => ({ ...prevState, message: `Profile updated successfully` }));
+                setShowToast(true);
                 router.push(routes.settings);
             } else if (isSignUp && !isEditProfile) {
                 //if its sign up create a new user in db if successful login user
@@ -67,17 +69,43 @@ export const AuthForm = ({ userId }) => {
 
                 if (result?.status === 200) {
                     // log user in
-                    await login(email, password, loginFailure, dispatch, setToastMsg, router)
+                    const loginResult = await login(email, password, loginFailure, dispatch);
+
+                    if (loginResult?.ok) {
+                        setShowToast(true);
+                        setToastPersist(true);
+                        setToastMsg({ isError: false, message: 'Account created successfully. Redirecting...' });
+                        setRedirecting(true);
+                        setShowLoaderOverlay(true);
+                        setTimeout(() => {
+                            setToastPersist(false);
+                            router.push(routes.home);
+                        }, 1200);
+                    }
                 }
 
                 setBase64String('')
             } else {
                 // log user in
-                await login(email, password, loginFailure, dispatch, router);
+                const loginResult = await login(email, password, loginFailure, dispatch);
+
+                if (loginResult?.ok) {
+                    setShowToast(true);
+                    setToastPersist(true);
+                    setToastMsg({ isError: false, message: 'Login successful. Redirecting...' });
+                    setRedirecting(true);
+                    setShowLoaderOverlay(true);
+                    setTimeout(() => {
+                        setToastPersist(false);
+                        router.push(routes.home);
+                    }, 1200);
+                }
             };
 
         } catch (error) {
+            setToastPersist(false);
             setToastMsg(({ isError: true, message: error.message }));
+            setShowToast(true);
             dispatch(loginFailure(error.message));
         };
     };
@@ -98,18 +126,30 @@ export const AuthForm = ({ userId }) => {
 
         if (status === "authenticated" && !!data?.user?.email && !isEditProfile) {
             dispatch(loginSuccess(data?.user));
-            router.push(routes.home);
+
+            // Show a friendly toast before redirecting
+            setShowToast(true);
+            setToastPersist(true);
+            setToastMsg({ isError: false, message: 'Login successful. Redirecting...' });
+            setRedirecting(true);
+            setShowLoaderOverlay(true);
+
+            setTimeout(() => {
+                setToastPersist(false);
+                router.push(routes.home);
+            }, 1200);
         }
 
         if (error) {
+            setToastPersist(false);
             setToastMsg(({ isError: true, message: error }));
-            setShowToast(true)
+            setShowToast(true);
         }
 
         if (loading) {
-            setShowLoaderOverlay(true)
+            setShowLoaderOverlay(true);
         } else {
-            setShowLoaderOverlay(false)
+            setShowLoaderOverlay(false);
         }
     }, [session, error, loading]);
 
